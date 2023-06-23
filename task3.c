@@ -1,4 +1,5 @@
 #include "monty.h"
+
 /**
  * sswap - fun to push swap
  * @stack: stack

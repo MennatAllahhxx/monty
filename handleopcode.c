@@ -6,7 +6,6 @@
  * @ln: line
  * @stack: stack
  */
-
 void handleopcode(char *buff, unsigned int ln, stack_t **stack)
 {
 	instruction_t opp[] = {
@@ -19,15 +18,15 @@ void handleopcode(char *buff, unsigned int ln, stack_t **stack)
 		{NULL, NULL}
 	};
 
-	char *token, *var;
+	char *token, *var, *cmd;
 	int i = 0;
 
 	token = strtok(buff, " ");
 
 	if (!strcmp(token, "push"))
 	{
-		var = strtok(NULL, " ");
-		if (!var)
+		var = strtok(NULL, "\n");
+		if (!var || !isnumber(var))
 		{
 			fprintf(stderr, "L%u: usage: push integer\n", ln);
 			exit(EXIT_FAILURE);
@@ -35,10 +34,10 @@ void handleopcode(char *buff, unsigned int ln, stack_t **stack)
 		ppush(stack, ln, atoi(var));
 		return;
 	}
-
+	cmd = strtok(buff, "\n");
 	while (opp[i].opcode)
 	{
-		if (!strcmp(opp[i].opcode, token))
+		if (!strcmp(opp[i].opcode, cmd))
 		{
 			opp[i].f(stack, ln);
 			return;

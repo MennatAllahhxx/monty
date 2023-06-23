@@ -20,6 +20,6 @@ void aadd(stack_t **stack, unsigned int len)
 
 	result = (*stack)->n;
 	(*stack) = (*stack)->next;
-	result += (*stack)->n;
+	(*stack)->n += result;
 	free(st);
 }

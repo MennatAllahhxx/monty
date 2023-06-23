@@ -16,7 +16,6 @@ void ppop(stack_t **stack, unsigned int len)
 		free(stack);
 		exit(EXIT_FAILURE);
 	}
-	fprintf(stdout, "%d\n", (*stack)->n);
 	*stack = (*stack)->next;
 	free(st);
 }

@@ -1,4 +1,5 @@
 #include "monty.h"
+
 /**
  * main - Entry point
  * @argc: count
@@ -12,7 +13,7 @@ int main(int argc, char **argv)
 	size_t buff_size = 0;
 	unsigned int ln = 0;
 	ssize_t lns;
-	stack_t **stack = NULL;
+	stack_t *stack = NULL;
 
 	if (argc != 2)
 	{
@@ -25,12 +26,14 @@ int main(int argc, char **argv)
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
-	lns = getline(&buff, &buff_size, fd);
-	while (lns >= 0)
+
+	while ((lns = getline(&buff, &buff_size, fd)) != -1)
 	{
-		ln++;
-		handleopcode(buff, ln, stack);
-		lns = getline(&buff, &buff_size, fd);
+		if (lns > 0)
+		{
+			ln++;
+			handleopcode(removespace(buff), ln, &stack);
+		}
 	}
 	free(buff);
 	fclose(fd);
