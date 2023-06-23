@@ -10,7 +10,7 @@ void sswap(stack_t **stack, unsigned int len)
 
 	if (!*stack || !(*stack)->next)
 	{
-		printf("L%u: can't swap, stack too short\n", len);
+		fprintf(stderr, "L%u: can't swap, stack too short\n", len);
 		exit(EXIT_FAILURE);
 	}
 	result = (*stack)->n;

@@ -12,10 +12,11 @@ void ppop(stack_t **stack, unsigned int len)
 	st = *stack;
 	if (!(*stack))
 	{
-		printf("L%u: can't pop an empty stack\n", len);
+		fprintf(stderr, "L%u: can't pop an empty stack\n", len);
 		free(stack);
 		exit(EXIT_FAILURE);
 	}
+	fprintf(stdout, "%d\n", (*stack)->n);
 	*stack = (*stack)->next;
 	free(st);
 }

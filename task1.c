@@ -12,8 +12,8 @@ void ppint(stack_t **stack, unsigned int ln)
 
 	if (!st)
 	{
-		printf("L%u: can't pint, stack empty\n", ln);
+		fprintf(stderr, "L%u: can't pint, stack empty\n", ln);
 		exit(EXIT_FAILURE);
 	}
-	printf("%d\n", st->n);
+	fprintf(stdout, "%d\n", st->n);
 }

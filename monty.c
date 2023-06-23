@@ -16,7 +16,7 @@ int main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		printf("USAGE: monty file");
+		fprintf(stdout, "USAGE: monty file");
 		exit(EXIT_FAILURE);
 	}
 	fd = fopen(argv[1], "r");

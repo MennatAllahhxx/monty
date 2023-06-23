@@ -14,12 +14,12 @@ void aadd(stack_t **stack, unsigned int len)
 
 	if (!st || !st->next)
 	{
-		printf("L%u: can't add, stack too short\n", len);
+		fprintf(stderr, "L%u: can't add, stack too short\n", len);
 		exit(EXIT_FAILURE);
 	}
 
 	result = (*stack)->n;
 	(*stack) = (*stack)->next;
-	(*stack)->n += result;
+	result += (*stack)->n;
 	free(st);
 }

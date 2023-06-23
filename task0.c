@@ -1,4 +1,5 @@
 #include "monty.h"
+
 /**
  * ppush - fun to push var
  * @stack: stack
@@ -14,7 +15,7 @@ void ppush(stack_t **stack, unsigned int len, int val)
 
 	if (!new_node)
 	{
-		printf("Error: malloc failed\n");
+		fprintf(stderr, "Error: malloc failed\n");
 		free(stack);
 		exit(EXIT_FAILURE);
 	}
@@ -40,7 +41,7 @@ void ppall(stack_t **stack, unsigned int ln)
 	(void)ln;
 	while (st)
 	{
-		printf("%d\n", st->n);
+		fprintf(stdout, "%d\n", st->n);
 		st = st->next;
 	}
 }
