@@ -69,4 +69,5 @@ void mmul(stack_t **stack, unsigned int ln);
 void nnop(stack_t **stack, unsigned int len);
 void ssub(stack_t **stack, unsigned int len);
 void divv(stack_t **stack, unsigned int ln);
+void mmod(stack_t **stack, unsigned int ln);
 #endif

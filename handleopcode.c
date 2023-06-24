@@ -12,8 +12,8 @@ int handleopcode(char *buff, stack_t **stack, unsigned int ln, FILE *fd)
 {
 	instruction_t opList[] = {
 		{"push", ppush}, {"pall", ppall}, {"pint", ppint},
-		{"pop", ppop}, {"swap", sswap}, {"add", aadd},
-		{"nop", nnop}, {"sub", ssub}, {"div", divv}, {"mul", mmul}, {NULL, NULL}
+		{"pop", ppop}, {"swap", sswap}, {"add", aadd}, {"nop", nnop},
+		{"sub", ssub}, {"div", divv}, {"mul", mmul}, {"mod", mmod}, {NULL, NULL}
 	};
 	unsigned int i = 0;
 	char *op;
