@@ -40,15 +40,16 @@ typedef struct instruction_s
 } instruction_t;
 
 /**
- * @arg: value
- * @file: pointer 
+ * struct montyInput - input file
+ * @file: pointer
  * @content: line content
+ * @value: value
  * Description: carries values through the program
  */
 typedef struct montyInput
 {
-        FILE *file;
-        char *content, *value;
+	FILE *file;
+	char *content, *value;
 } montyInput_t;
 
 extern montyInput_t montyData;
