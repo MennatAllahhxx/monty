@@ -1,15 +1,11 @@
-#ifndef MONTY_H
-#define MONTY_H
-
-#define _GNU_SOURCE
-
+#ifndef _MONTY_H_
+#define _MONTY_H_
+#define  _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>
-#include <errno.h>
-#include <sys/stat.h>
-#include <fcntl.h>
 #include <unistd.h>
+#include <fcntl.h>
 #include <string.h>
 #include <ctype.h>
 
@@ -43,16 +39,33 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-int main(int argc, char **argv);
-char *removespace(char *buff);
-void handleopcode(char *buff, unsigned int ln, stack_t **stack);
+/**
+ * @arg: value
+ * @file: pointer 
+ * @content: line content
+ * Description: carries values through the program
+ */
+typedef struct montyInput
+{
+        FILE *file;
+        char *content, *value;
+} montyInput_t;
+
+extern montyInput_t montyData;
+
+int handleopcode(char *buff, stack_t **stack, unsigned int ln, FILE *fd);
+void freeStack(stack_t *stack);
 int isnumber(char *var);
-void ppush(stack_t **stack, unsigned int len, int val);
+char *removespace(char *buff);
+void addnode(stack_t **stack, int n);
+void ppush(stack_t **stack, unsigned int len);
 void ppall(stack_t **stack, unsigned int ln);
 void ppint(stack_t **stack, unsigned int ln);
-void ppop(stack_t **stack, unsigned int ln);
+void ppop(stack_t **stack, unsigned int len);
 void sswap(stack_t **stack, unsigned int len);
 void aadd(stack_t **stack, unsigned int len);
+void mmul(stack_t **stack, unsigned int ln);
 void nnop(stack_t **stack, unsigned int len);
-
+void ssub(stack_t **stack, unsigned int len);
+void divv(stack_t **stack, unsigned int ln);
 #endif

@@ -13,7 +13,6 @@ char *removespace(char *buff)
 		i++;
 	return (&buff[i]);
 }
-
 /**
  * isnumber - a fun to check if str is num
  * @var: variale to be checked
@@ -36,4 +35,20 @@ int isnumber(char *var)
 			return (0);
 	}
 	return (1);
+}
+/**
+ * freeStack - frees a doubly linked list
+ * @stack: stack
+ */
+void freeStack(stack_t *stack)
+{
+	stack_t *st;
+
+	st = stack;
+	while (stack)
+	{
+		st = stack->next;
+		free(stack);
+		stack = st;
+	}
 }

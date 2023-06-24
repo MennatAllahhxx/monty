@@ -1,50 +1,43 @@
 #include "monty.h"
-
 /**
  * handleopcode - a fun to hande opcode
  * @buff: buffer
  * @ln: line
  * @stack: stack
+ * @fd: poiner
+ * Return: 1 on success, EXIT_FAILURE other wise
  */
-void handleopcode(char *buff, unsigned int ln, stack_t **stack)
+
+int handleopcode(char *buff, stack_t **stack, unsigned int ln, FILE *fd)
 {
-	instruction_t opp[] = {
-		{"pall", ppall},
-		{"pint", ppint},
-		{"pop", ppop},
-		{"swap", sswap},
-		{"add", aadd},
-		{"nop", nnop},
-		{NULL, NULL}
+	instruction_t opList[] = {
+		{"push", ppush}, {"pall", ppall}, {"pint", ppint},
+		{"pop", ppop}, {"swap", sswap}, {"add", aadd},
+		{"nop", nnop}, {"sub", ssub}, {"div", divv}, {"mul", mmul}, {NULL, NULL}
 	};
+	unsigned int i = 0;
+	char *op;
 
-	char *token, *var, *cmd;
-	int i = 0;
-
-	token = strtok(buff, " ");
-
-	if (!strcmp(token, "push"))
+	op = strtok(buff, " \n\t");
+	if (op && op[0] == '#')
+		return (0);
+	montyData.value = strtok(NULL, " \n\t");
+	while (opList[i].opcode && op)
 	{
-		var = strtok(NULL, "\n");
-		if (!var || !isnumber(var))
+		if (strcmp(op, opList[i].opcode) == 0)
 		{
-			fprintf(stderr, "L%u: usage: push integer\n", ln);
-			exit(EXIT_FAILURE);
-		}
-		ppush(stack, ln, atoi(var));
-		return;
-	}
-	cmd = strtok(buff, "\n");
-	while (opp[i].opcode)
-	{
-		if (!strcmp(opp[i].opcode, cmd))
-		{
-			opp[i].f(stack, ln);
-			return;
+			opList[i].f(stack, ln);
+			return (0);
 		}
 		i++;
 	}
-
-	fprintf(stderr, "L%u: unknown opcode: %s\n", ln, token);
-	exit(EXIT_FAILURE);
+	if (op && opList[i].opcode == NULL)
+	{
+		fprintf(stderr, "L%d: unknown instruction %s\n", ln, op);
+		fclose(fd);
+		free(buff);
+		freeStack(*stack);
+		exit(EXIT_FAILURE);
+	}
+	return (1);
 }

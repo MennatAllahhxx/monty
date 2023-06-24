@@ -1,31 +1,41 @@
 #include "monty.h"
-
 /**
  * ppush - fun to push var
  * @stack: stack
  * @len: line
- * @val: val
  */
-void ppush(stack_t **stack, unsigned int len, int val)
+void ppush(stack_t **stack, unsigned int len)
 {
-	stack_t *new_node;
+        int n, i = 0, fail__flag = 0;
 
-	new_node = malloc(sizeof(stack_t));
-	(void)len;
-
-	if (!new_node)
-	{
-		fprintf(stderr, "Error: malloc failed\n");
-		free(stack);
-		exit(EXIT_FAILURE);
-	}
-	new_node->n = val;
-	new_node->next = *stack;
-	new_node->prev = NULL;
-
-	if (*stack != NULL)
-		(*stack)->prev = new_node;
-	*stack = new_node;
+        if (montyData.value)
+        {
+                if (montyData.value[0] == '-')
+                        i++;
+                for (; montyData.value[i] != '\0'; i++)
+                {
+                        if (montyData.value[i] > 57 || montyData.value[i] < 48)
+                                fail__flag = 1;
+                }
+                if (fail__flag == 1)
+                {
+                        fprintf(stderr, "L%d: usage: push integer\n", len);
+                        fclose(montyData.file);
+                        free(montyData.content);
+                        freeStack(*stack);
+                        exit(EXIT_FAILURE);
+                }
+        }
+        else
+        {
+                fprintf(stderr, "L%d: usage: push integer\n", len);
+                fclose(montyData.file);
+                free(montyData.content);
+                freeStack(*stack);
+                exit(EXIT_FAILURE);
+        }
+        n = atoi(montyData.value);
+        addnode(stack, n);
 }
 
 /**
