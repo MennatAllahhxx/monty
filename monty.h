@@ -70,4 +70,9 @@ void nnop(stack_t **stack, unsigned int len);
 void ssub(stack_t **stack, unsigned int len);
 void divv(stack_t **stack, unsigned int ln);
 void mmod(stack_t **stack, unsigned int ln);
+void ppchar(stack_t **stack, unsigned int ln);
+void ppstr(stack_t **stack, unsigned int ln);
+void rrotl(stack_t **stack, unsigned int ln);
+void rrotr(stack_t **stack, unsigned int ln);
+
 #endif
