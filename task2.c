@@ -13,9 +13,11 @@ void ppop(stack_t **stack, unsigned int len)
 	if (!(*stack))
 	{
 		fprintf(stderr, "L%u: can't pop an empty stack\n", len);
-		free(stack);
 		exit(EXIT_FAILURE);
 	}
+
 	*stack = (*stack)->next;
+	if (*stack)
+		(*stack)->prev = NULL;
 	free(st);
 }
